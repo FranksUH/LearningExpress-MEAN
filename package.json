@@ -1,0 +1,14 @@
+{
+  "name": "learnexpress",
+  "version": "1.0.0",
+  "description": "This project is just for learning Express",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Frankie Mujica Cal",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
