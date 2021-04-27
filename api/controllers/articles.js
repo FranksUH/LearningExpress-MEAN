@@ -1,6 +1,6 @@
-import Article from '../../data-layer/models/article';
+Article = require('../../data-layer/models/article');
 
-export function getAll(_, res) {
+exports.getAll = (_, res) => {
     Article.find({}, (err, articles) => {
         if(err){
             res.status(500).send(err);
@@ -11,7 +11,7 @@ export function getAll(_, res) {
     });
 }
 
-export function create(req, res) {
+exports.create = (req, res) => {
     let newArticle = new Article(req.body);
     newArticle.save((err, article) => {
         if(err){
@@ -23,7 +23,7 @@ export function create(req, res) {
     });
 }
 
-export function getArticle(req, res) {
+exports.getArticle = (req, res) => {
     Article.findById(req.params.articleid, (err, article) => {
         if (err) {
             res.status(500).send(err);
@@ -34,7 +34,7 @@ export function getArticle(req, res) {
     });
 }
 
-export function updateArticle(req, res) {
+exports.updateArticle = (req, res) => {
     Article.findOneAndUpdate({ 
         _id: req.params.articleid },
         req.body,
@@ -49,7 +49,7 @@ export function updateArticle(req, res) {
     });
 }
 
-export function deleteArticle(req, res) {
+exports.deleteArticle = (req, res) => {
     Article.remove({ _id: req.params.articleid }, 
         (err, article) => {
             if (err) {

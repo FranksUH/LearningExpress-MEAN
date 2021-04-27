@@ -1,4 +1,4 @@
-export default (app) => {
+articleRoutes = (app) => {
     var articleControllers = require('../controllers/articles');
 
     app.route('/articles')
@@ -10,3 +10,5 @@ export default (app) => {
        .put(articleControllers.updateArticle)
        .delete(articleControllers.deleteArticle);
 }
+
+module.exports = articleRoutes;

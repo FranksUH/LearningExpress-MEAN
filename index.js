@@ -1,22 +1,24 @@
-import express from 'express';
-import { urlencoded, json } from "body-parser";
+express = require('express');
+bodyParser = require('body-parser');
+require('./data-layer/db'); //ensure database connection is stablished
 
 const port = process.env.PORT || 4000;
-import articleRoutes from './api/routes/articleRoutes';
+articleRoutes = require('./api/routes/articleRoutes');
 
 const app = express();
 
 //body parser middleware
-app.use(urlencoded({ extended: true }));
-app.use(json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 //error handling middleware
 app.use((err, _, res, next) => {
 
     if(err){ //process errors
-        console.log(err.stack);
+        console.log(err);
         res.status(500)
-           .send(`Error: ${err}`);
+           .send(`Error: ${err}`)
+           .json(err);
     }
 
     if(res.body){
