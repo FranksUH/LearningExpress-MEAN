@@ -1,28 +1,28 @@
-const express = require('express');
-const bodyParser = require("body-parser");
+import express from 'express';
+import { urlencoded, json } from "body-parser";
 
 const port = process.env.PORT || 4000;
-const articleRoutes = require('./api/routes/articleRoutes');
+import articleRoutes from './api/routes/articleRoutes';
 
 const app = express();
 
 //body parser middleware
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(urlencoded({ extended: true }));
+app.use(json());
 
 //error handling middleware
-app.use((err, req, res, next) => {
+app.use((err, _, res, next) => {
 
     if(err){ //process errors
         console.log(err.stack);
         res.status(500)
-           .send('Somethins is broken');
+           .send(`Error: ${err}`);
     }
 
     if(res.body){
         next();
     }
-})
+});
 
 //cors middleware
 app.use(function(req, res, next) {
