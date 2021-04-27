@@ -1,4 +1,4 @@
-module.exports = (app) => {
+export default (app) => {
     var articleControllers = require('../controllers/articles');
 
     app.route('/articles')

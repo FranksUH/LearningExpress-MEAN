@@ -1,6 +1,6 @@
-const Article = require('../../data-layer/models/article');
+import Article from '../../data-layer/models/article';
 
-exports.getAll = (_, res) => {
+export function getAll(_, res) {
     Article.find({}, (err, articles) => {
         if(err){
             res.status(500).send(err);
@@ -9,9 +9,9 @@ exports.getAll = (_, res) => {
             res.status(200).json(articles);
         }
     });
-};
+}
 
-exports.create = (req, res) => {
+export function create(req, res) {
     let newArticle = new Article(req.body);
     newArticle.save((err, article) => {
         if(err){
@@ -21,9 +21,9 @@ exports.create = (req, res) => {
             res.status(201).json(article);
         }
     });
-};
+}
 
-exports.getArticle = (req, res) => {
+export function getArticle(req, res) {
     Article.findById(req.params.articleid, (err, article) => {
         if (err) {
             res.status(500).send(err);
@@ -32,9 +32,9 @@ exports.getArticle = (req, res) => {
             res.status(200).json(article);
         };
     });
-};
+}
 
-exports.updateArticle = (req, res) => {
+export function updateArticle(req, res) {
     Article.findOneAndUpdate({ 
         _id: req.params.articleid },
         req.body,
@@ -47,9 +47,9 @@ exports.updateArticle = (req, res) => {
             res.status(200).json(article);
         }    
     });
-};
+}
 
-exports.deleteArticle = (req, res) => {
+export function deleteArticle(req, res) {
     Article.remove({ _id: req.params.articleid }, 
         (err, article) => {
             if (err) {
@@ -59,4 +59,4 @@ exports.deleteArticle = (req, res) => {
                 res.status(200).json({ message: "Article successfully deleted" });
             }
         });
-};
+}
